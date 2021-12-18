@@ -23,7 +23,7 @@ func ParallelFilter[T any](sequence []T, predicate func(x T) bool) []T {
 		for _, x := range sequence {
 			x := x
 			go func() {
-				defer func() { wg.Done() }()
+				defer wg.Done()
 				if predicate(x) {
 					ch <- x
 				}
